@@ -548,6 +548,7 @@ The following are excluded via `.gitignore` and recreated at runtime:
 
 ## Author
 
+**Naman Babbar**
 **Goutam Patel**
 
 ---
