@@ -1,14 +1,25 @@
 import axios from "axios";
 
-// Get API base URL from environment variable or use default
-// For mobile access, set REACT_APP_API_URL=http://YOUR_IP_ADDRESS:8080
-const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+const API_PORT = process.env.REACT_APP_API_PORT || "8080";
+
+/**
+ * Resolves the backend URL automatically:
+ * - PC:  http://localhost:3000  → http://localhost:8080
+ * - Phone: http://192.168.x.x:3000 → http://192.168.x.x:8080
+ * Set REACT_APP_API_URL only if you need a fixed override (e.g. production).
+ */
+export function getApiBaseUrl() {
+  if (process.env.REACT_APP_API_URL) {
+    return process.env.REACT_APP_API_URL.replace(/\/$/, "");
+  }
+  const host = window.location.hostname;
+  return `http://${host}:${API_PORT}`;
+}
 
 const API = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: getApiBaseUrl(),
 });
 
-// Automatically attach JWT token for all requests
 API.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");

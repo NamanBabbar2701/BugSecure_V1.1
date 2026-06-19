@@ -1,4 +1,31 @@
+# Dependencies
 node_modules/
 frontend/node_modules/
+
+# Environment & secrets
 .env
 frontend/.env
+backend/.env
+*.env.local
+
+# Build outputs
+backend/target/
+frontend/build/
+
+# Runtime / uploaded data (created automatically when the app runs)
+backend/secure_uploads/*
+!backend/secure_uploads/.gitkeep
+backend/sandbox_workdir/*
+!backend/sandbox_workdir/.gitkeep
+backend/sandbox_exec_workdir/
+
+# IDE & OS
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
